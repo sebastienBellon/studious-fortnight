@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/services/firestore_service.dart';
+import 'package:flutter_ecommerce_riverpod_firebase/services/storage_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final firebaseAuthProvider =
@@ -14,6 +15,15 @@ final databaseProvider = Provider<FireStoreService?>((ref) {
   String? uid = auth.asData?.value?.uid;
   if (uid != null) {
     return FireStoreService(uid: uid);
+  }
+  return null;
+});
+
+final storageProvider = Provider<StorageService?>((ref) {
+  final auth = ref.watch(authStateChangeProvider);
+  String? uid = auth.asData?.value?.uid;
+  if (uid != null) {
+    return StorageService(uid: uid);
   }
   return null;
 });

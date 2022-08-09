@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/app/pages/admin/admin_add_product.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/app/providers.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/models/product.dart';
+import 'package:flutter_ecommerce_riverpod_firebase/widgets/project_list_tile.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AdminHome extends ConsumerWidget {
@@ -34,14 +35,13 @@ class AdminHome extends ConsumerWidget {
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
                   final product = snapshot.data![index];
-                  return ListTile(
-                    title: Text(product.name),
-                    trailing: IconButton(
-                      onPressed: () => ref
+                  return ProductListTile(
+                    product: product,
+                    onDelete: () async {
+                      await ref
                           .read(databaseProvider)!
-                          .deleteProduct(product.id!),
-                      icon: const Icon(Icons.delete),
-                    ),
+                          .deleteProduct(product.id!);
+                    },
                   );
                 });
           }

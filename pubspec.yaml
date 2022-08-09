@@ -39,6 +39,8 @@ dependencies:
   firebase_storage: ^10.3.3
   flutterfire_ui: ^0.4.3
   flutter_riverpod: ^1.0.4
+  image_picker: ^0.8.5+3
+  flutter_slidable: ^2.0.0
 
 dev_dependencies:
   flutter_test:
