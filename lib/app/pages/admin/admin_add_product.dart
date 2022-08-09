@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/app/providers.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/models/product.dart';
+import 'package:flutter_ecommerce_riverpod_firebase/utils/snackbars.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -103,6 +104,14 @@ class _AdminAddProductPageState extends ConsumerState<AdminAddProductPage> {
         description: descriptionEditingController.text,
         price: double.parse(priceEditingController.text),
         imageUrl: imgUrl,
+      ),
+    );
+    openIconSnackBar(
+      context,
+      "Product added successfully",
+      const Icon(
+        Icons.check,
+        color: Colors.white,
       ),
     );
     Navigator.pop(context);

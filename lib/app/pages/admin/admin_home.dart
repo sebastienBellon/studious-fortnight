@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/app/pages/admin/admin_add_product.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/app/providers.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/models/product.dart';
+import 'package:flutter_ecommerce_riverpod_firebase/utils/snackbars.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/widgets/project_list_tile.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
@@ -52,6 +53,14 @@ class AdminHome extends ConsumerWidget {
                   return ProductListTile(
                     product: product,
                     onDelete: () async {
+                      openIconSnackBar(
+                        context,
+                        "Deleting item...",
+                        const Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                        ),
+                      );
                       await ref
                           .read(databaseProvider)!
                           .deleteProduct(product.id!);
