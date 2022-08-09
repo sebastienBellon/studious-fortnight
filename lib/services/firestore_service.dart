@@ -8,10 +8,11 @@ class FireStoreService {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   Future<void> addProduct(Product product) async {
+    final docId = firestore.collection("products").doc().id;
     await firestore
         .collection('products')
-        .add(product.toMap())
-        .then((value) => print(value))
+        .doc(docId)
+        .set(product.toMap(docId))
         .catchError((onError) => print("Error"));
   }
 
@@ -23,5 +24,9 @@ class FireStoreService {
               final d = doc.data();
               return Product.fromMap(d);
             }).toList());
+  }
+
+  Future<void> deleteProduct(String id) async {
+    return await firestore.collection('products').doc(id).delete();
   }
 }

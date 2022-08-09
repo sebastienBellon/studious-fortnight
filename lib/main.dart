@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/app/auth_widget.dart';
-import 'package:flutter_ecommerce_riverpod_firebase/app/pages/admin/admin_page.dart';
+import 'package:flutter_ecommerce_riverpod_firebase/app/pages/admin/admin_home.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/app/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

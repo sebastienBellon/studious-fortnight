@@ -36,6 +36,12 @@ class AdminHome extends ConsumerWidget {
                   final product = snapshot.data![index];
                   return ListTile(
                     title: Text(product.name),
+                    trailing: IconButton(
+                      onPressed: () => ref
+                          .read(databaseProvider)!
+                          .deleteProduct(product.id!),
+                      icon: const Icon(Icons.delete),
+                    ),
                   );
                 });
           }
