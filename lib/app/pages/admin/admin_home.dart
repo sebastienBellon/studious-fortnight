@@ -4,6 +4,7 @@ import 'package:flutter_ecommerce_riverpod_firebase/app/providers.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/models/product.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/widgets/project_list_tile.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lottie/lottie.dart';
 
 class AdminHome extends ConsumerWidget {
   const AdminHome({Key? key}) : super(key: key);
@@ -31,6 +32,19 @@ class AdminHome extends ConsumerWidget {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.active &&
               snapshot.data != null) {
+            if (snapshot.data.isEmpty) {
+              return Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text("No products yet..."),
+                    Lottie.asset("assets/anim/empty.json", // here
+                        width: 200,
+                        repeat: false),
+                  ],
+                ),
+              );
+            }
             return ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
