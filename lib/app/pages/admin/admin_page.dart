@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/app/pages/admin/admin_add_product.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/app/providers.dart';
+import 'package:flutter_ecommerce_riverpod_firebase/models/product.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AdminHome extends ConsumerWidget {
@@ -23,6 +24,23 @@ class AdminHome extends ConsumerWidget {
         onPressed: () => Navigator.of(context).push(
           MaterialPageRoute(builder: (_) => const AdminAddProductPage()),
         ),
+      ),
+      body: StreamBuilder<List<Product>>(
+        stream: ref.read(databaseProvider)!.getProducts(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.active &&
+              snapshot.data != null) {
+            return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  final product = snapshot.data![index];
+                  return ListTile(
+                    title: Text(product.name),
+                  );
+                });
+          }
+          return const Center(child: CircularProgressIndicator());
+        },
       ),
     );
   }

@@ -14,4 +14,14 @@ class FireStoreService {
         .then((value) => print(value))
         .catchError((onError) => print("Error"));
   }
+
+  Stream<List<Product>> getProducts() {
+    return firestore
+        .collection('products')
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) {
+              final d = doc.data();
+              return Product.fromMap(d);
+            }).toList());
+  }
 }
