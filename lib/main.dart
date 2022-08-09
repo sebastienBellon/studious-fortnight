@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/app/auth_widget.dart';
+import 'package:flutter_ecommerce_riverpod_firebase/app/pages/admin/admin_page.dart';
 import 'package:flutter_ecommerce_riverpod_firebase/app/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -24,7 +25,10 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.orange,
+          primary: Colors.orange,
+        ),
       ),
       home: AuthWidget(
         signedInBuilder: (context) => Scaffold(
@@ -44,6 +48,7 @@ class MyApp extends ConsumerWidget {
           ),
         ),
         nonSignedInBuilder: (_) => const SignInPage(),
+        adminSignedInBuilder: (context) => const AdminHome(),
       ),
     );
   }
